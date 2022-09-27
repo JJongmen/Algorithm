@@ -7,22 +7,17 @@ public class Main {
     private static char[][] board;
 
     private static void printStar(int n, int x, int y) {
-        if (n == 3) {
-            for (int dy = 0; dy < 3; dy++) {
-                board[x][y + dy] = '*';
-                board[x + 2][y + dy] = '*';
-            }
-            board[x + 1][y] = '*';
-            board[x + 1][y + 2] = '*';
+        if (n == 1) {
+            board[x][y] = '*';
             return;
         }
         int third = n / 3;
-        for (int dy = 0; dy <= third * 2; dy += third) {
-            printStar(third, x, y + dy);
-            printStar(third, x + third * 2, y + dy);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i == 1 && j == 1) continue;
+                printStar(third, x + third * i, y + third * j);
+            }
         }
-        printStar(third, x + third, y);
-        printStar(third, x + third, y + third * 2);
     }
 
     public static void main(String[] args) throws IOException {
