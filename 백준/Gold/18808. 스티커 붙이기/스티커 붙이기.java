@@ -74,19 +74,19 @@ public class Main {
     }
 
     private static boolean locationToPutSticker(int x, int y, int[][] sticker) {
-        int[][] temp = new int[N][M];
-        for (int i = 0; i < N; i++) {
-            temp[i] = notebook[i].clone();
-        }
         int R = sticker.length;
         int C = sticker[0].length;
+        int[][] temp = new int[R][C];
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                temp[i][j] = notebook[x + i][y + j];
+            }
+        }
         for (int i = x; i < x + R; i++) {
             for (int j = y; j < y + C; j++) {
                 if (sticker[i - x][j - y] == 1) {
                     if (notebook[i][j] == 1) {
-                        for (int k = 0; k < N; k++) {
-                            notebook[k] = temp[k].clone();
-                        }
+                        rollback(x, y, temp);
                         return false;
                     }
                     notebook[i][j] = 1;
@@ -94,5 +94,15 @@ public class Main {
             }
         }
         return true;
+    }
+
+    private static void rollback(int x, int y, int[][] temp) {
+        int R = temp.length;
+        int C = temp[0].length;
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                notebook[x + i][y + j] = temp[i][j];
+            }
+        }
     }
 }
