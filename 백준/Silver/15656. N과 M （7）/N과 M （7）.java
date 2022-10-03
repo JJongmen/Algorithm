@@ -7,14 +7,14 @@ public class Main {
     private static int[] arr = new int[10];
     private static int N;
     private static int M;
-    private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    private static StringBuilder ans = new StringBuilder();
 
     private static void func(int cur) throws IOException {
         if (cur == M) {
             for (int i = 0; i < M; i++) {
-                bw.write(arr[i] + " ");
+                ans.append(arr[i]).append(" ");
             }
-            bw.write("\n");
+            ans.append("\n");
             return;
         }
         for (int i = 0; i < N; i++) {
@@ -36,8 +36,6 @@ public class Main {
         Arrays.sort(nums, 0, N);
         func(0);
 
-        bw.flush();
-        bw.close();
-        br.close();
+        System.out.println(ans);
     }
 }
