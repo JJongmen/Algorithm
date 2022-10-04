@@ -23,26 +23,19 @@ public class Main {
     private static void move(int direction) {
         while (direction-- > 0) rotate();
         for (int i = 0; i < N; i++) {
-            Deque<Integer> deque = new LinkedList<>();
-            boolean combineFlag = false;
+            int idx = 0;
+            int[] after = new int[N];
             for (int j = 0; j < N; j++) {
                 if (board[i][j] == 0) continue;
-                if (!deque.isEmpty() && deque.peekLast() == board[i][j] && !combineFlag) {
-                    deque.pollLast();
-                    deque.offer(board[i][j] * 2);
-                    combineFlag = true;
-                    continue;
+                if (after[idx] == 0) {
+                    after[idx] = board[i][j];
+                } else if (after[idx] == board[i][j]) {
+                    after[idx++] *= 2;
+                } else {
+                    after[++idx] = board[i][j];
                 }
-                deque.offer(board[i][j]);
-                combineFlag = false;
             }
-            for (int j = 0; j < N; j++) {
-                if (!deque.isEmpty()) {
-                    board[i][j] = deque.poll();
-                    continue;
-                }
-                board[i][j] = 0;
-            }
+            board[i] = after;
         }
     }
 
