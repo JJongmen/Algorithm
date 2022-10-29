@@ -1,60 +1,38 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	
-	static Integer[] sortArr;
-	static int posCnt;
-	
-	static int binSearch(int n) {
-		int left = 0;
-		int right = posCnt - 1;
-		
-		while (left < right && left >= 0) {
-			int mid = (left + right) / 2;
-			if (sortArr[mid] < n) {
-				left = mid + 1;
-			} else if (sortArr[mid] > n) {
-				right = mid - 1;
-			} else {
-				left = mid - 1;
-				right = mid;
-			}
-		}
-		return right;
-	}
+    static int N;
+    static List<Integer> sortList = new ArrayList<>();
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int N = Integer.parseInt(br.readLine());
-		int[] posArr = new int[N];
-		Set<Integer> set = new HashSet<>();
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			int pos = Integer.parseInt(st.nextToken());;
-			posArr[i] = pos;
-			set.add(pos);
-		}
-		
-		sortArr = set.toArray(new Integer[0]);
-		posCnt = sortArr.length;
-		Arrays.sort(sortArr);
-		for (int i = 0; i < N; i++) {
-			bw.write(binSearch(posArr[i]) + " ");
-		}
-		
-		bw.flush();
-		br.close();
-		bw.close();
-		
-	}
+    static int lowerBound(int target) {
+        int st = 0;
+        int en = sortList.size();
+        while (st < en) {
+            int mid = (st + en) / 2;
+            if (sortList.get(mid) >= target) en = mid;
+            else st = mid + 1;
+        }
+        return st;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        N = Integer.parseInt(br.readLine());
+        List<Integer> list = new ArrayList<>(N);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            list.add(Integer.parseInt(st.nextToken()));
+        }
+        Set<Integer> set = new TreeSet<>();
+        set.addAll(list);
+        sortList.addAll(set);
+        for (int i = 0; i < N; i++) {
+            bw.write(lowerBound(list.get(i)) + " ");
+        }
+        bw.flush();
+        bw.close();
+        br.close();
+    }
 }
