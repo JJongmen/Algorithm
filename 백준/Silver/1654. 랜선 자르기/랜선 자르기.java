@@ -4,34 +4,33 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
+    static int N, K;
+    static int[] lines = new int[10000];
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int K = Integer.parseInt(st.nextToken());
-		int N = Integer.parseInt(st.nextToken());
-		int[] lanLines = new int[K];
-		long max = 0;
-		for (int i = 0; i < K; i++) {
-			lanLines[i] = Integer.parseInt(br.readLine());
-			max = Math.max(max, lanLines[i]);
-		}
-		long low = 1;
-		long high = max + 1;
-		while (low < high) {
-			long mid = (low + high) / 2;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        K = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < K; i++) {
+            lines[i] = Integer.parseInt(br.readLine());
+        }
 
-			long tmp = 0;
-			for (int i = 0; i < K; i++) {
-				tmp += lanLines[i] / mid;
-			}
-			if (tmp >= N) {
-				low = mid + 1;
-			} else {
-				high = mid;
-			}
-		}
-		System.out.println(low - 1);
-	}
+        long l = 0;
+        long r = (1 << 31) - 1;
+        while (l < r) {
+            long mid = (l + r + 1) / 2;
+            if (solve(mid)) l = mid;
+            else r = mid - 1;
+        }
+        System.out.println(l);
+    }
+
+    static boolean solve(long length) {
+        long cnt = 0;
+        for (int i = 0; i < K; i++) {
+            cnt += lines[i] / length;
+        }
+        return cnt >= N;
+    }
 }
