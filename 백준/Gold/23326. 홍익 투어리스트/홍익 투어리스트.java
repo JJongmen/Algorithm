@@ -39,16 +39,16 @@ public class Main {
                 cur = (cur + x - 1) % N + 1;
             } else if (query == 3) {
                 if (places.isEmpty()) {
-                    bw.write("-1\n");
+                    bw.write("-1");
                 } else {
                     Integer next = places.ceiling(cur);
                     if (next == null) {
-                        Integer first = places.first();
-                        bw.write(String.format("%d\n", N + first - cur));
+                        bw.write(String.valueOf(N + places.first() - cur));
                     } else {
-                        bw.write(String.format("%d\n", next - cur));
+                        bw.write(String.valueOf(next - cur));
                     }
                 }
+                bw.newLine();
             }
         }
         bw.flush();
