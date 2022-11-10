@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 public class Main {
     static int N, Q;
-    static int[] seq = new int[500003];
     static TreeSet<Integer> places = new TreeSet<>();
     static int cur = 1;
 
@@ -37,19 +36,18 @@ public class Main {
                 }
             } else if (query == 2) {
                 int x = Integer.parseInt(st.nextToken());
-                cur = (cur + x % N) % N;
-                if (cur == 0) cur = N;
+                cur = (cur + x - 1) % N + 1;
             } else if (query == 3) {
-                Integer next = places.ceiling(cur);
-                if (next == null) {
-                    Integer next2 = places.ceiling(1);
-                    if (next2 == null) {
-                        bw.write("-1\n");
-                    } else {
-                        bw.write(String.format("%d\n", N + next2 - cur));
-                    }
+                if (places.isEmpty()) {
+                    bw.write("-1\n");
                 } else {
-                    bw.write(String.format("%d\n", next - cur));
+                    Integer next = places.ceiling(cur);
+                    if (next == null) {
+                        Integer first = places.first();
+                        bw.write(String.format("%d\n", N + first - cur));
+                    } else {
+                        bw.write(String.format("%d\n", next - cur));
+                    }
                 }
             }
         }
