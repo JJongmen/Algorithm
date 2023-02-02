@@ -7,25 +7,24 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         N = scan.nextInt();
 
-        dfs("", 0);
+        dfs(new StringBuilder());
     }
-
-    private static void dfs(String cur, int last) {
+    
+    private static void dfs(StringBuilder cur) {
         if (cur.length() == N) {
             System.out.println(cur);
             System.exit(0);
         }
         for (int i = 1; i <= 3; i++) {
-            if (i == last) continue;
-            String nxt = cur + i;
+            StringBuilder nxt = new StringBuilder(cur).append(i);
             if (!isGoodSeq(nxt)) continue;
-            dfs(nxt, i);
+            dfs(nxt);
         }
     }
 
-    private static boolean isGoodSeq(String seq) {
+    private static boolean isGoodSeq(StringBuilder seq) {
         int size = seq.length();
-        for (int len = 2; size - 2 * len >= 0; len++) {
+        for (int len = 1; size - 2 * len >= 0; len++) {
             if (seq.substring(size - 2 * len, size - len)
                     .equals(seq.substring(size - len))) {
                 return false;
