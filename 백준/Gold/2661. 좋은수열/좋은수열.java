@@ -24,11 +24,11 @@ public class Main {
     }
 
     private static boolean isGoodSeq(String seq) {
-        for (int i = 0; i < seq.length(); i++) {
-            for (int len = 1; i + 2 * len <= seq.length(); len++) {
-                if (seq.substring(i, i + len).equals(seq.substring(i + len, i + 2 * len))) {
-                    return false;
-                }
+        int size = seq.length();
+        for (int len = 2; size - 2 * len >= 0; len++) {
+            if (seq.substring(size - 2 * len, size - len)
+                    .equals(seq.substring(size - len))) {
+                return false;
             }
         }
         return true;
