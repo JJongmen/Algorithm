@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -19,7 +21,7 @@ public class Main {
 
         works = new List[N + 1];
         for (int i = 1; i <= N; i++) {
-            works[i] = new LinkedList<>();
+            works[i] = new ArrayList<>();
         }
 
         for (int i = 1; i <= N; i++) {
@@ -31,9 +33,10 @@ public class Main {
         }
 
         worker = new int[M + 1];
+        visit = new boolean[M + 1];
         int result = 0;
         for (int i = 1; i <= N; i++) {
-            visit = new boolean[M + 1];
+            Arrays.fill(visit, 1, M + 1, false);
             if (dfs(i)) result++;
         }
         System.out.println(result);
