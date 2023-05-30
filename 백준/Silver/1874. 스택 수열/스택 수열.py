@@ -1,9 +1,11 @@
-N = int(input())
+import sys
+
+N = int(sys.stdin.readline())
 last = 0
 stack = []
 result = []
 for _ in range(N):
-    num = int(input())
+    num = int(sys.stdin.readline())
     if last < num:
         for i in range(last + 1, num + 1):
             stack.append(i)
