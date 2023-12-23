@@ -1,10 +1,10 @@
 # [level 2] 가장 큰 수 - 42746 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42746#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42746?language=kotlin) 
 
 ### 성능 요약
 
-메모리: 64.7 MB, 시간: 21.97 ms
+메모리: 66.3 MB, 시간: 34.89 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 12월 6일 21:37:18
+2023년 12월 6일 21:45:56
 
 ### 문제 설명
 
