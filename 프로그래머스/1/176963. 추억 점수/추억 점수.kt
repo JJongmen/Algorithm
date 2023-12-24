@@ -1,10 +1,8 @@
 class Solution {
-    fun solution(names: Array<String>, yearnings: IntArray, photos: Array<Array<String>>): IntArray {
-        val nameToYearning = (0 until names.size).associate { names[it] to yearnings[it] }
-        return photos.map { photo -> 
-            photo.map { name ->
-                nameToYearning[name] ?: 0
-            }.sum()
+    fun solution(names: Array<String>, yearnings: IntArray, photoes: Array<Array<String>>): IntArray {
+        val nameToYearning = names.zip(yearnings.toTypedArray()).toMap()
+        return photoes.map { photo -> 
+            photo.sumOf { nameToYearning[it] ?: 0 }
         }.toIntArray()
     }
 }
