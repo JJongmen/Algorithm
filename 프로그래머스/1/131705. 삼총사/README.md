@@ -1,10 +1,10 @@
 # [level 1] 삼총사 - 131705 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131705) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131705?language=kotlin) 
 
 ### 성능 요약
 
-메모리: 60.6 MB, 시간: 0.02 ms
+메모리: 61.3 MB, 시간: 8.04 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 12월 0일 15:48:17
+2023년 12월 0일 15:59:54
 
 ### 문제 설명
 
