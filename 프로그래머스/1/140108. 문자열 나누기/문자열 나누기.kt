@@ -1,22 +1,13 @@
 class Solution {
     fun solution(s: String): Int {
-        var answer = 1
-        var idx = 0
-        var xCnt = 0
-        var notXCnt = 0
-        var x = s[idx]
-        while (idx < s.length) {
-            if (s[idx] == x) {
-                xCnt++
+        var answer = 0
+        val stack = mutableListOf<Char>()
+        s.forEach {
+            if (stack.isEmpty()) answer++
+            if (stack.isEmpty() || stack.last() == it) {
+                stack.add(it)
             } else {
-                notXCnt++
-            }
-            if (++idx == s.length) break
-            if (xCnt == notXCnt) {
-                answer++
-                xCnt = 0
-                notXCnt = 0
-                x = s[idx]
+                stack.removeLast()
             }
         }
         return answer
