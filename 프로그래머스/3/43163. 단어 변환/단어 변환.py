@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import deque
 
 def solution(begin, target, words):
     answer = 0
@@ -9,12 +9,16 @@ def solution(begin, target, words):
     dict = {word:[] for word in words}
     dict[begin] = []
     def canTransfer(word, other):
-        a = Counter(word)
-        b = Counter(other)
-        c = a | b
-        if sum((c - a).values()) == 1 and sum((c - b).values()) == 1:
-            return True
-        return False
+        if len(word) != len(other):
+            return False
+        diff = 0
+        for a, b in zip(word, other):
+            if a != b:
+                diff += 1
+                if diff > 1:
+                    return False
+        return True
+            
     for idx, word in enumerate(words):
         if canTransfer(begin, word):
             dict[begin].append(word)
@@ -24,10 +28,10 @@ def solution(begin, target, words):
                 dict[other].append(word)
     
     visit = {word:False for word in words}
-    q = [(begin, 0)]
+    q = deque([(begin, 0)])
     visit[begin] = True
     while q:
-        word, cnt = q.pop(0)
+        word, cnt = q.popleft()
         if word == target:
             return cnt
         for nxt in dict[word]:
